@@ -1,3 +1,9 @@
 obj/
 .DS_Store
 __pycache__/
+
+.prettierignore
+.vscode/
+src/p1/
+bstman
+dccompress
