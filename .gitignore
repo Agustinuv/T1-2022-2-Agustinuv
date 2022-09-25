@@ -6,4 +6,4 @@ __pycache__/
 .vscode/
 src/p1/
 bstman
-dccompress
+# dccompress

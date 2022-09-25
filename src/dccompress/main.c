@@ -70,6 +70,14 @@ int main(int argc, char** argv) {
 	// printHola();
 	tree = createQuadTree(NULL, img, 0, img->width, 0, img->height);
 
+	printf("Lets see the means and standard deviations of the tree...\n");
+	/* Imprimimos los valores de la media y la desviación estandar de cada nodo */
+
+	// malloc para el arreglo de floats
+	float* out_direction = malloc(6 * sizeof(float));
+	getStatistics(tree, out_direction);
+	printf("L: %f, a: %f, b: %f, L_std: %f, a_std: %f, b_std: %f\n", out_direction[0], out_direction[1], out_direction[2], out_direction[3], out_direction[4], out_direction[5]);
+
 	if (0 == 1) {
 		printf("Deep: %d\n", tree->deep);
 	}
