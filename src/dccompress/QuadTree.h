@@ -30,9 +30,11 @@ QuadTree *createQuadTree(QuadTree *parent, Image *img, int l, int r, int u, int 
 // En caso de ser una hoja
 QuadTree *addLeaf(QuadTree *qt, Image *img, int x, int y);
 
+// Imprimir la imagen a partir del QuadTree
 void rePrintImg(QuadTree *node, Image *img);
 
-// Extras para debuggear
+// Copiar QuadTree en otro
+QuadTree *copyQuadTree(QuadTree *node);
 
 // Contador de hojas
 int countLeaves(QuadTree *node);

@@ -97,6 +97,8 @@ int main(int argc, char** argv) {
 		/* Cantidad máxima de hojas que le permitiremos tener al árbol */
 		int h = atoi(PARAM);
 		printf("Comprimiendo imagen con h = %d\n", h);
+		// compressImage(tree, h, 0, 128);
+		useCompressImage(tree, h);
 
 		/* Buscar el menor alpha tal que el árbol filtrado tiene menos de h hojas */
 		// ...

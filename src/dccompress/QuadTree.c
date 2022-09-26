@@ -68,6 +68,36 @@ void rePrintImg(QuadTree *node, Image *img) {
 	}
 }
 
+QuadTree *copyQuadTree(QuadTree *node) {
+	QuadTree *qt = malloc(sizeof(QuadTree));
+
+	qt->parent = node->parent;
+	qt->l = node->l;
+	qt->r = node->r;
+	qt->u = node->u;
+	qt->d = node->d;
+	qt->deep = node->deep;
+	qt->isLeaf = node->isLeaf;
+
+	if (node->isLeaf) {
+		qt->UL = NULL;
+		qt->UR = NULL;
+		qt->LL = NULL;
+		qt->LR = NULL;
+		qt->L = node->L;
+		qt->a = node->a;
+		qt->b = node->b;
+	}
+	else {
+		qt->UL = copyQuadTree(node->UL);
+		qt->UR = copyQuadTree(node->UR);
+		qt->LL = copyQuadTree(node->LL);
+		qt->LR = copyQuadTree(node->LR);
+	}
+
+	return qt;
+}
+
 int countLeaves(QuadTree *node) {
 	if (node->isLeaf) {
 		return 1;
