@@ -2,8 +2,10 @@ obj/
 .DS_Store
 __pycache__/
 
+p1-imgs/
+
 .prettierignore
 .vscode/
 src/p1/
-bstman
+# bstman
 # dccompress

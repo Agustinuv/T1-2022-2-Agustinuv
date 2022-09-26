@@ -62,24 +62,24 @@ int compressImage(QuadTree *tree, int h, int limit_inf, int limit_sup) {
 	QuadTree *copyTree = copyQuadTree(tree);
 
 	int alpha = (limit_sup + limit_inf) / 2;
-	printf("Comprimiendo con alpha %d in [%d, %d]\n", alpha, limit_inf, limit_sup);
+	// printf("Comprimiendo con alpha %d in [%d, %d]\n", alpha, limit_inf, limit_sup);
 
 	useFilterAlpha(copyTree, alpha);
 
 	int n_leaves = countLeaves(copyTree);
 	freeQuadTree(copyTree);
-	printf("Numero de hojas: %d\n", n_leaves);
+	// printf("Numero de hojas: %d\n", n_leaves);
 
 	if (n_leaves > h) {
-		printf("%d > %d\n", n_leaves, h);
+		// printf("%d > %d\n", n_leaves, h);
 		return compressImage(tree, h, alpha, limit_sup);
 	}
 	else if (n_leaves < h) {
-		printf("%d < %d\n", n_leaves, h);
+		// printf("%d < %d\n", n_leaves, h);
 		return compressImage(tree, h, limit_inf, alpha);
 	}
 	else {
-		printf("%d == %d\n", n_leaves, h);
+		// printf("%d == %d\n", n_leaves, h);
 		return alpha;
 	}
 }
@@ -90,9 +90,9 @@ void useCompressImage(QuadTree *tree, int h) {
 
 	int alpha = compressImage(tree, h, limit_inf, limit_sup);
 
-	printf("Comprimiendo con alpha %d\n", alpha);
+	// printf("Comprimiendo con alpha %d\n", alpha);
 	useFilterAlpha(tree, alpha);
-	printf("Total de hojas: %d\n", countLeaves(tree));
+	// printf("Total de hojas: %d\n", countLeaves(tree));
 }
 
 void calculateStatistics(QuadTree *node, int *N, float *mu_arr, float *sigma_arr) {
