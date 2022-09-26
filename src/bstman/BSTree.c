@@ -61,3 +61,44 @@ void bstreePrint(BSTree *tree) {
 	printf("%d ", tree->key);
 	bstreePrint(tree->right_child);
 }
+
+void bstreeFree(BSTree *tree) {
+	if (tree == NULL) {
+		return;
+	}
+	bstreeFree(tree->left_child);
+	bstreeFree(tree->right_child);
+	free(tree);
+}
+
+BSTree *findNode(BSTree *node, int key) {
+	if (node == NULL) {
+		return NULL;
+	}
+	if (node->key == key) {
+		return node;
+	}
+	if (key < node->key) {
+		return findNode(node->left_child, key);
+	}
+	else {
+		return findNode(node->right_child, key);
+	}
+}
+
+void bstreePathSearch(BSTree *node, int key) {
+	if (node == NULL) {
+		printf("X\n");
+	}
+	else if (node->key == key) {
+		printf("%d\n", node->key);
+	}
+	if (key < node->key) {
+		printf("%d ", node->key);
+		bstreePathSearch(node->left_child, key);
+	}
+	else {
+		printf("%d ", node->key);
+		bstreePathSearch(node->right_child, key);
+	}
+}
