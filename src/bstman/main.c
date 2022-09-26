@@ -36,17 +36,37 @@ int main(int argc, char** argv) {
 
 	BSTree* tree = bstreeCreate(input_file, node_count);
 
-	printf("Print tree:\n");
-	bstreePrint(tree);
-	printf("\n");
+	// printf("Print tree:\n");
+	// bstreePrint(tree);
+	// printf("\n");
 
 	fscanf(input_file, "%d", &query_count);
 	/* leemos las consultas */
 	char command[32];
 	int value;
+	BSTree* result;
 	for (int i = 0; i < query_count; i++) {
 		fscanf(input_file, "%s %d", command, &value);
-		printf("%s %d\n", command, value);
+
+		if (string_equals(command, "PATH")) {
+			printf("PATH %d\n", value);
+			bstreePathSearch(tree, value);
+		}
+		else if (string_equals(command, "DEEP")) {
+			printf("DEEP %d\n", value);
+			result = findNode(tree, value);
+			printf("Result: %d\n", result->key);
+		}
+		else if (string_equals(command, "ORDER")) {
+			bstreePrint(tree);
+			printf("\n");
+		}
+
+		else {
+			printf("Comando desconocido: %s\n", command);
+		}
+
+		// printf("%s %d\n", command, value);
 		/* completar la revision de comando y ejecucion de los mismos */
 	}
 
