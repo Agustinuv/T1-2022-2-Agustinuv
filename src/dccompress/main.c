@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
 	img_png_write_to_file(img, OUTPUT);
 
 	/* Liberamos la memoria del árbol */
-	// ...
+	freeQuadTree(tree);
 
 	/* Liberamos la memoria de la imagen */
 	img_png_destroy(img);

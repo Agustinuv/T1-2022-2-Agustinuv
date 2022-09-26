@@ -107,3 +107,16 @@ int countLeaves(QuadTree *node) {
 		       countLeaves(node->LL) + countLeaves(node->LR);
 	}
 }
+
+void freeQuadTree(QuadTree *node) {
+	if (node->isLeaf) {
+		free(node);
+	}
+	else {
+		freeQuadTree(node->UL);
+		freeQuadTree(node->UR);
+		freeQuadTree(node->LL);
+		freeQuadTree(node->LR);
+		free(node);
+	}
+}

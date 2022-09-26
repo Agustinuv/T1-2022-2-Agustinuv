@@ -19,6 +19,11 @@ void filterAlpha(QuadTree *node, float alpha, float *mu_arr, float *sigma_arr) {
 		if (sigma <= alpha) {
 			// printf("Filtrando cuadrante de anchos %d con sigma %f\n", node->r - node->l, sigma);
 
+			freeQuadTree(node->UL);
+			freeQuadTree(node->UR);
+			freeQuadTree(node->LL);
+			freeQuadTree(node->LR);
+
 			node->isLeaf = true;
 			node->UL = NULL;
 			node->UR = NULL;
@@ -62,6 +67,7 @@ int compressImage(QuadTree *tree, int h, int limit_inf, int limit_sup) {
 	useFilterAlpha(copyTree, alpha);
 
 	int n_leaves = countLeaves(copyTree);
+	freeQuadTree(copyTree);
 	printf("Numero de hojas: %d\n", n_leaves);
 
 	if (n_leaves > h) {

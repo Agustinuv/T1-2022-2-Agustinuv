@@ -38,3 +38,6 @@ QuadTree *copyQuadTree(QuadTree *node);
 
 // Contador de hojas
 int countLeaves(QuadTree *node);
+
+// Liberar memoria del QuadTree
+void freeQuadTree(QuadTree *node);
