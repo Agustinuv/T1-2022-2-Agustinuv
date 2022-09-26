@@ -6,6 +6,7 @@
 
 #include "../imagelib/imagelib.h"
 #include "QuadTree.h"
+#include "filters.h"
 
 /** Retorna true si ambos strings son iguales */
 bool string_equals(char* string1, char* string2) {
@@ -70,14 +71,6 @@ int main(int argc, char** argv) {
 	// printHola();
 	tree = createQuadTree(NULL, img, 0, img->width, 0, img->height);
 
-	printf("Lets see the means and standard deviations of the tree...\n");
-	/* Imprimimos los valores de la media y la desviación estandar de cada nodo */
-
-	// malloc para el arreglo de floats
-	float* out_direction = malloc(6 * sizeof(float));
-	getStatistics(tree, out_direction);
-	printf("L: %f, a: %f, b: %f, L_std: %f, a_std: %f, b_std: %f\n", out_direction[0], out_direction[1], out_direction[2], out_direction[3], out_direction[4], out_direction[5]);
-
 	if (0 == 1) {
 		printf("Deep: %d\n", tree->deep);
 	}
@@ -94,7 +87,10 @@ int main(int argc, char** argv) {
 	if (string_equals(MODE, "filter")) {
 		/* Entonces usaremos PARAM como límite */
 		alpha = atof(PARAM);
+		printf("Hojas inicial: %d\n", countLeaves(tree));
 		printf("Filtrando imagen con alpha = %f\n", alpha);
+		useFilterAlpha(tree, alpha);
+		printf("Hojas final: %d\n", countLeaves(tree));
 	}
 	/* Si estamos en modo comprimir */
 	else if (string_equals(MODE, "compress")) {
@@ -111,13 +107,14 @@ int main(int argc, char** argv) {
 
 	// Pintamos un cuadrado de ejemplo //
 	// Para tu tarea usa este ejemplo para pintar las imagenes //
-	img_square_paint(
-	    img,                                           // Imagen donde se pintara el cuadrado
-	    img->height / 3,                               // Fila donde comienza el cuadrado
-	    img->width / 4,                                // Columna donde comienza el cuadrado
-	    img->height / 5,                               // Largo del lado del cuadrado
-	    (Color){.L = 46.97, .a = 38.96, .b = -69.98}   // Color a pintar
-	);
+	rePrintImg(tree, img);
+	// img_square_paint(
+	//     img,                                           // Imagen donde se pintara el cuadrado
+	//     img->height / 3,                               // Fila donde comienza el cuadrado
+	//     img->width / 4,                                // Columna donde comienza el cuadrado
+	//     img->height / 5,                               // Largo del lado del cuadrado
+	//     (Color){.L = 46.97, .a = 38.96, .b = -69.98}   // Color a pintar
+	// );
 	// Fin ejemplo //
 
 	/* Momento en el que terminamos de procesar la imagen */

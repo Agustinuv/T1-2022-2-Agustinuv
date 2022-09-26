@@ -49,56 +49,31 @@ QuadTree *addLeaf(QuadTree *qt, Image *img, int x, int y) {
 	return qt;
 }
 
-void calculateStatistics(QuadTree *node, int *N, float *mu_arr, float *sigma_arr) {
+void rePrintImg(QuadTree *node, Image *img) {
 	if (node->isLeaf) {
-		int n = *N + 1;
-
-		float mu_L = mu_arr[0];
-		float mu_a = mu_arr[1];
-		float mu_b = mu_arr[2];
-
-		mu_arr[0] = mu_arr[0] + (node->L - mu_arr[0]) / (float)n;
-		mu_arr[1] = mu_arr[1] + (node->a - mu_arr[1]) / (float)n;
-		mu_arr[2] = mu_arr[2] + (node->b - mu_arr[2]) / (float)n;
-
-		sigma_arr[0] = sigma_arr[0] + (node->L - mu_L) * (node->L - mu_arr[0]);
-		sigma_arr[1] = sigma_arr[1] + (node->a - mu_a) * (node->a - mu_arr[1]);
-		sigma_arr[2] = sigma_arr[2] + (node->b - mu_b) * (node->b - mu_arr[2]);
-
-		*N = n;
+		for (int i = node->u; i < node->d; i++) {
+			img_square_paint(
+			    img,
+			    node->u,
+			    node->l,
+			    node->r - node->l,
+			    (Color){.L = node->L, .a = node->a, .b = node->b});
+		}
 	}
 	else {
-		calculateStatistics(node->UL, N, mu_arr, sigma_arr);
-		calculateStatistics(node->UR, N, mu_arr, sigma_arr);
-		calculateStatistics(node->LL, N, mu_arr, sigma_arr);
-		calculateStatistics(node->LR, N, mu_arr, sigma_arr);
+		rePrintImg(node->UL, img);
+		rePrintImg(node->UR, img);
+		rePrintImg(node->LL, img);
+		rePrintImg(node->LR, img);
 	}
 }
 
-void getStatistics(QuadTree *node, float *out_direction) {
-	int *N = malloc(sizeof(int));
-	*N = 0;
-
-	float *mu_arr = malloc(3 * sizeof(float));
-	mu_arr[0] = 0;
-	mu_arr[1] = 0;
-	mu_arr[2] = 0;
-
-	float *sigma_arr = malloc(3 * sizeof(float));
-	sigma_arr[0] = 0;
-	sigma_arr[1] = 0;
-	sigma_arr[2] = 0;
-
-	calculateStatistics(node, N, mu_arr, sigma_arr);
-
-	out_direction[0] = mu_arr[0];
-	out_direction[1] = mu_arr[1];
-	out_direction[2] = mu_arr[2];
-	out_direction[3] = sqrt(sigma_arr[0] / (float)(*N));
-	out_direction[4] = sqrt(sigma_arr[1] / (float)(*N));
-	out_direction[5] = sqrt(sigma_arr[2] / (float)(*N));
-
-	free(N);
-	free(mu_arr);
-	free(sigma_arr);
+int countLeaves(QuadTree *node) {
+	if (node->isLeaf) {
+		return 1;
+	}
+	else {
+		return countLeaves(node->UL) + countLeaves(node->UR) +
+		       countLeaves(node->LL) + countLeaves(node->LR);
+	}
 }

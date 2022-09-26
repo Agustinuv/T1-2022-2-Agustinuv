@@ -30,8 +30,9 @@ QuadTree *createQuadTree(QuadTree *parent, Image *img, int l, int r, int u, int 
 // En caso de ser una hoja
 QuadTree *addLeaf(QuadTree *qt, Image *img, int x, int y);
 
-// Calculos de la media y la desviación estandar del cuadrante
-void getStatistics(QuadTree *node, float *out_direction);
+void rePrintImg(QuadTree *node, Image *img);
 
-// Calcula la media y la desviación estandar de un cuadrante
-void calculateStatistics(QuadTree *node, int *N, float *mu_arr, float *sigma_arr);
+// Extras para debuggear
+
+// Contador de hojas
+int countLeaves(QuadTree *node);
