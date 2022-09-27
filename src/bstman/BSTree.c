@@ -53,13 +53,14 @@ void bstreeInsert(BSTree *node, int value) {
 	}
 }
 
-void bstreePrint(BSTree *tree) {
+void bstreePrint(BSTree *tree, FILE *output_file) {
 	if (tree == NULL) {
 		return;
 	}
-	bstreePrint(tree->left_child);
-	printf("%d ", tree->key);
-	bstreePrint(tree->right_child);
+	bstreePrint(tree->left_child, output_file);
+	fprintf(output_file, "%d ", tree->key);
+	// printf("%d ", tree->key);
+	bstreePrint(tree->right_child, output_file);
 }
 
 void bstreeFree(BSTree *tree) {
@@ -75,10 +76,10 @@ BSTree *findNode(BSTree *node, int key) {
 	if (node == NULL) {
 		return NULL;
 	}
-	if (node->key == key) {
+	else if (node->key == key) {
 		return node;
 	}
-	if (key < node->key) {
+	else if (key < node->key) {
 		return findNode(node->left_child, key);
 	}
 	else {
@@ -86,19 +87,23 @@ BSTree *findNode(BSTree *node, int key) {
 	}
 }
 
-void bstreePathSearch(BSTree *node, int key) {
+void bstreePathSearch(BSTree *node, int key, FILE *output_file) {
 	if (node == NULL) {
-		printf("X\n");
+		fprintf(output_file, "X \n");
+		// printf("X \n");
 	}
 	else if (node->key == key) {
-		printf("%d\n", node->key);
+		fprintf(output_file, "%d \n", node->key);
+		// printf("%d \n", node->key);
 	}
-	if (key < node->key) {
-		printf("%d ", node->key);
-		bstreePathSearch(node->left_child, key);
+	else if (key < node->key) {
+		fprintf(output_file, "%d ", node->key);
+		// printf("%d ", node->key);
+		bstreePathSearch(node->left_child, key, output_file);
 	}
 	else {
-		printf("%d ", node->key);
-		bstreePathSearch(node->right_child, key);
+		fprintf(output_file, "%d ", node->key);
+		// printf("%d ", node->key);
+		bstreePathSearch(node->right_child, key, output_file);
 	}
 }

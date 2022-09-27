@@ -23,13 +23,13 @@ BSTree *bstreeCreate(FILE *input_file, int node_count);
 void bstreeInsert(BSTree *node, int key);
 
 // PATH search in the BSTree
-void bstreePathSearch(BSTree *node, int key);
+void bstreePathSearch(BSTree *node, int key, FILE *output_file);
 
 // Deep search in the BSTree
 BSTree *findNode(BSTree *node, int key);
 
 // Print the BSTree sorted
-void bstreePrint(BSTree *node);
+void bstreePrint(BSTree *tree, FILE *output_file);
 
 // Find subtree in tree
 bool bstreeFindSubtree(BSTree *node, BSTree *subtree);
