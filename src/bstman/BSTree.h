@@ -36,3 +36,7 @@ bool bstreeFindSubtree(BSTree *node, BSTree *subtree);
 
 // Free the BSTree
 void bstreeFree(BSTree *node);
+
+bool compareTrees(BSTree tree1, BSTree treee2);
+
+int isSubtree(BSTree *tree, BSTree *subtree);

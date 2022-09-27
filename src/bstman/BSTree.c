@@ -107,3 +107,51 @@ void bstreePathSearch(BSTree *node, int key, FILE *output_file) {
 		bstreePathSearch(node->right_child, key, output_file);
 	}
 }
+
+bool compareTrees(BSTree tree1, BSTree treee2) {
+	printf("tree1: %d, tree2: %d\n", tree1.key, treee2.key);
+	if (tree1.key != treee2.key) {
+		return false;
+	}
+	if (tree1.left_child == NULL && treee2.left_child != NULL) {
+		return false;
+	}
+	if (tree1.left_child != NULL && treee2.left_child == NULL) {
+		return false;
+	}
+	if (tree1.right_child == NULL && treee2.right_child != NULL) {
+		return false;
+	}
+	if (tree1.right_child != NULL && treee2.right_child == NULL) {
+		return false;
+	}
+	if (tree1.left_child != NULL && treee2.left_child != NULL) {
+		if (!compareTrees(*tree1.left_child, *treee2.left_child)) {
+			return false;
+		}
+	}
+	if (tree1.right_child != NULL && treee2.right_child != NULL) {
+		if (!compareTrees(*tree1.right_child, *treee2.right_child)) {
+			return false;
+		}
+	}
+	return true;
+}
+
+int isSubtree(BSTree *tree, BSTree *subtree) {
+	if (tree == NULL) {
+		return 0;
+	}
+
+	BSTree *start_subtree_node = findNode(tree, subtree->key);
+
+	if (start_subtree_node == NULL) {
+		return 0;
+	}
+
+	if (compareTrees(*start_subtree_node, *subtree)) {
+		return 1;
+	}
+
+	return 0;
+}

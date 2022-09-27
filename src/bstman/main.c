@@ -61,6 +61,14 @@ int main(int argc, char** argv) {
 			fprintf(output_file, "\n");
 			// printf("\n");
 		}
+		else if (string_equals(command, "SUBTREE")) {
+			printf("SUBTREE %d\n", value);
+			BSTree* subtree = bstreeCreate(input_file, value);
+			int is_sub = isSubtree(tree, subtree);
+			bstreeFree(subtree);
+			printf("Is subtree?: %d\n", is_sub);
+			fprintf(output_file, "%d\n", is_sub);
+		}
 
 		else {
 			printf("Comando desconocido: %s\n", command);
