@@ -1,6 +1,6 @@
 # Tarea 1 2022-2
 
-Recuerda subir el código de tu tarea en este repositorio a más tardar el día de la entrega a las 23:59 hrs.
+## Agustín Urrutia
 
 ## Compilar
 
@@ -17,40 +17,33 @@ make clean && make
 ## Ejecutar
 
 Para la parte 1:
+
 ```
 ./dccompress p1-imgs/egg_king.png out.png filter 5
 ```
 
 Para la parte 2:
+
 ```
 ./bstman p2-txt/input.txt output.txt
 ```
 
+## Información adicional
 
-## Cápsulas 
-Te recomendamos ver esta [cápsula](https://youtu.be/j9W1qKCvFRE) antes de hacer el BST. 
+El código fue desarrollado utilizando `GitHub Copilot`
 
-## Librerias requridas
+Para el cálculo de la media y la desviación fueron utilizados los métodos incrementales [del link](https://datagenetics.com/blog/november22017/index.html) entregado por el equipo docente
 
-Debes instalar `libpng-dev` en caso que no lo tengas instalado. (Make avisara si no lo tienes instalado)
+No se utilizó código de terceros, salvo el código inicial provisto por el equipo docente
 
-### Ubuntu
-```
-sudo apt install libpng-dev
-```
+### Sobre `dccompress` :black_joker:
 
-### macOS
+- `QuadTree.c` y `QuadTree.h` se encargan princiaplemte del manejo del árbol, su creación, copia, manejo de algún atributo y destrucción.
 
-Utilicen [edd-docker](https://github.com/IIC2133-PUC/edd-docker) por el momento para poder utlizar la libreria de imagenes.
+- `filter.c` y `filter.h` se encargan de la aplicación de los filtros a las imágenes, incluyendo los cálculos de la media y desviación. Se importa la bibliotea `math.h` para el cálculo.
 
-### Docker
+### Sobre `bstman` :evergreen_tree:
 
-En [edd-docker](https://github.com/IIC2133-PUC/edd-docker) ya viene todo instalado.
+- El algoritmo creado no realiza ningún tipo de operación de balanceo.
 
-## Para revisar servidor
-
-En algunos días se subirán testcases al servidor para que puedas probar tu tarea:
-
-- Para revisar los _test publicos_ en el servidor del curso se tiene que acceder al siguiente [link](http://edd.ing.puc.cl/test?repo=T1-2022-2-USERNAME)
-
-- Para revisar los _test de evaluacion_ en el servidor del curso se tiene que acceder al siguiente [link](http://edd.ing.puc.cl/grade?repo=T1-2022-2-USERNAME)
+- Se vio la cápsula subida por el equipo docente, la que fue utilizada solo como estudio, pero el código fue desarrollado por mí. Pudo ocurrir que inconscientemente y el uso de `Copilot` haya generado un código muy similar al de la cápsula, pero no fue intencional (lo menciono por si acaso).
